@@ -4,8 +4,15 @@ import conectarAoBanco from "../config/dbConfig.js";
 const conexao = await conectarAoBanco(process.env.STRING_CONEXAO)
 
 // Função assíncrona para buscar todos os posts da coleção "posts" no banco de dados "imensao-instabytes"
-export default async function getTodosPosts(){
+export async function getTodosPosts(){
     const db =  conexao.db ("imensao-instabytes");
     const colecao = db.collection("posts");
     return colecao.find().toArray();
+}
+
+export async function criarPost(novoPost){
+    
+    const db =  conexao.db ("imensao-instabytes");
+    const colecao = db.collection("posts");
+    return colecao.insertOne(novoPost);
 }
